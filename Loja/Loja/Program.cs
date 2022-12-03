@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Loja.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,9 +15,14 @@ namespace Loja
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            using (DBContext context = new DBContext())
+            {
+                context.AtualizarEstruturaBancoDados();
+                context.AbrirConexao();
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new frmMain());
+            }
         }
     }
 }
